@@ -1,0 +1,73 @@
+
+.homepage {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Hauteur de la page complète */
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
+  background: linear-gradient(to right, #5a3e9b, #ffffff, #5a3e9b); /* Couleurs des côtés */
+  font-family: 'Arial', sans-serif;
+}
+
+.page-container {
+  width: 80%; /* Ajuste la largeur centrale */
+  max-width: 1200px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  text-align: center; /* Centre le texte dans le conteneur */
+}
+
+.title h1 {
+  font-size: 3rem;
+  font-family: 'Cinzel', serif;
+  margin-bottom: 20px; /* Ajoute de l'espace sous le titre */
+}
+
+.login-box {
+  width: 100%; /* Assure que la boîte est centrée dans le parent */
+  max-width: 400px; /* Largeur maximum de la boîte */
+  text-align: center;
+  margin: 0 auto; /* Centre la boîte horizontalement */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background: #5a3e9b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #7d57cc;
+}
+
+.signup-link {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+.signup-link a {
+  color: #5a3e9b;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}

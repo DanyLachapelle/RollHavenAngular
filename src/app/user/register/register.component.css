@@ -1,0 +1,88 @@
+/* Centrage du formulaire dans la page */
+.register-container {
+  width: 100%;
+  max-width: 400px; /* Largeur maximale du formulaire */
+  margin: 0 auto; /* Centrage horizontal */
+  background: white; /* Fond blanc pour le formulaire */
+  padding: 20px;
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre autour du cadre */
+  text-align: center; /* Centrer le texte */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Taille et marge du titre */
+h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Espacement entre chaque champ du formulaire */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Style des champs de saisie */
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+/* Style du bouton d'inscription */
+button {
+  background: #5a3e9b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+button:hover {
+  background: #6a4e9f;
+}
+
+/* Lien pour la connexion et retour */
+.login-link,
+.back-link {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+/* Fond de la page, couleur de fond pour les côtés et le dessus du formulaire */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh; /* Hauteur totale de la fenêtre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #5a3e9b, #ffffff); /* Dégradé violet du haut vers le bas */
+  font-family: 'Arial', sans-serif;
+}
+
+/* Pour le lien retour à la page d'accueil */
+.back-link a {
+  color: #5a3e9b;
+  text-decoration: none;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
+}
+
+/* Pour le lien de connexion */
+.login-link a {
+  color: #5a3e9b;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
