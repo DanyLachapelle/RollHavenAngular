@@ -1,0 +1,188 @@
+/* Conteneur principal pour la gestion des campagnes */
+.campaign-management {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: 100vh; /* Pour occuper toute la hauteur de la page */
+  background: linear-gradient(to bottom, #5a3e9b, #ffffff);
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Colonne gauche - Liste des campagnes */
+.left-panel {
+  flex: 3; /* 75% de la largeur */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Onglets pour basculer entre les campagnes */
+.campaign-tabs {
+  display: flex;
+  justify-content: flex-end; /* Aligner à droite */
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  border: 2px solid #5a3e9b;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #5a3e9b;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab.active {
+  background-color: #5a3e9b;
+  color: white;
+}
+
+/* Liste des campagnes */
+.campaign-list {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Pour les listes longues */
+  max-height: 75%; /* Ajuste la hauteur maximale */
+}
+
+.campaign-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.campaign-list ul li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.campaign-list ul li:last-child {
+  border-bottom: none;
+}
+
+/* Colonne droite - Rejoindre une campagne */
+.right-panel {
+  flex: 1; /* 25% de la largeur */
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Formulaire pour rejoindre une campagne */
+.right-panel h2 {
+  margin-bottom: 20px;
+  color: #5a3e9b;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.right-panel button {
+  background: #5a3e9b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.right-panel button:hover {
+  background-color: #4a2c8b;
+}
+
+/* Responsivité */
+@media (max-width: 768px) {
+  .campaign-management {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+
+/* Container pour les campagnes */
+.campaign-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Colonnes adaptatives */
+  gap: 16px; /* Espacement entre les tuiles */
+  padding: 16px;
+}
+
+/* Style pour chaque tuile */
+.campaign-tile {
+  background-color: #f8f9fa; /* Couleur de fond légère */
+  border: 1px solid #dee2e6; /* Bordure légère */
+  border-radius: 8px; /* Coins arrondis */
+  padding: 16px;
+  text-align: center; /* Centrer le contenu */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre subtile */
+  transition: transform 0.3s, box-shadow 0.3s; /* Animation au survol */
+}
+
+/* Animation au survol */
+.campaign-tile:hover {
+  transform: scale(1.05); /* Agrandissement */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+}
+
+/* Titre de chaque campagne */
+.campaign-tile h3 {
+  font-size: 1.2em;
+  margin-bottom: 8px;
+}
+
+/* Description */
+.campaign-tile p {
+  font-size: 1em;
+  margin-bottom: 16px;
+  color: #6c757d; /* Texte légèrement gris */
+}
+
+/* Bouton */
+.campaign-tile button {
+  background-color: #007bff; /* Couleur bleue */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+.campaign-tile button:hover {
+  background-color: #0056b3; /* Bleu plus sombre au survol */
+}
+

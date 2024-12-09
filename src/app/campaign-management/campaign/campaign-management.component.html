@@ -1,0 +1,95 @@
+<div class="campaign-management">
+  <div class="left-panel">
+    <div class="campaign-tabs">
+      <div
+        class="tab"
+        [class.active]="activeTab === 'your-campaigns'"
+        (click)="selectTab('your-campaigns')"
+      >
+        <span>Your Campaigns</span>
+      </div>
+      <div
+        class="tab"
+        [class.active]="activeTab === 'public-campaigns'"
+        (click)="selectTab('public-campaigns')"
+      >
+        <span>Public Campaigns</span>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'your-campaigns'" class="campaign-list">
+      <h2>Your Campaigns</h2>
+
+      <!-- Tuile pour créer une nouvelle campagne -->
+      <div class="campaign-item create-tile">
+        <button (click)="toggleCreateCampaign()">Create New Campaign</button>
+      </div>
+
+      <!-- Si l'utilisateur clique sur "Create New Campaign", afficher le formulaire -->
+      <div *ngIf="isCreatingCampaign">
+        <app-create-campaign (campaignCreated)="loadYourCampaigns()"></app-create-campaign>
+      </div>
+
+      <!-- Liste des campagnes existantes -->
+      <ul>
+        <li>
+          <!-- Placeholder for your campaigns -->
+        </li>
+      </ul>
+    </div>
+   <!--
+    <div *ngIf="activeTab === 'public-campaigns'" class="campaign-list">
+      <h2>Public Campaigns</h2>
+      <ul>
+        <li>
+
+        </li>
+      </ul>
+    </div>
+  </div>
+-->
+    <div *ngIf="activeTab === 'public-campaigns'" class="campaign-list">
+      <h2>Public Campaigns</h2>
+
+      <!-- Indicateur de chargement -->
+      <div *ngIf="isLoading">Loading public campaigns...</div>
+
+      <!-- Gestion des erreurs -->
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+      <!-- Liste des campagnes sous forme de tuiles -->
+      <div class="campaign-grid" *ngIf="!isLoading && publicCampaigns.length > 0">
+        <div *ngFor="let campaign of publicCampaigns" class="campaign-tile">
+          <h3>{{ campaign.name }}</h3>
+          <p>{{ campaign.description }}</p>
+          <button (click)="viewCampaign(campaign.id)">Join Campaign</button>
+        </div>
+      </div>
+
+      <!-- Message si aucune campagne n'est disponible -->
+      <div *ngIf="!isLoading && publicCampaigns.length === 0">
+        <p>No public campaigns available.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-panel join-campaign">
+    <div class="account-info-button">
+      <button (click)="viewAccountInfo()">Account Information</button>
+    </div>
+    <h2>Join a Campaign</h2>
+    <form>
+      <div class="form-group">
+        <input
+          type="text"
+          id="campaign-id"
+          placeholder="Enter the campaign ID"
+          name="campaign-id"
+          required
+        />
+      </div>
+      <button type="submit">Join</button>
+    </form>
+  </div>
+</div>
+

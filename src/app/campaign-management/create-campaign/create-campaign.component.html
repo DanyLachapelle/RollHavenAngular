@@ -1,0 +1,35 @@
+<div class="create-campaign-form">
+  <h2>Create Campaign</h2>
+
+  <form [formGroup]="campaignForm" (ngSubmit)="createCampaign()">
+    <!-- Nom de la campagne -->
+    <div class="form-group">
+      <label for="name">Campaign Name</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter campaign name" required>
+      <div *ngIf="campaignForm.get('name')?.invalid && campaignForm.get('name')?.touched" class="error">
+        Name is required and must be at most 150 characters.
+      </div>
+    </div>
+
+    <!-- Accessibilité -->
+    <div class="form-group">
+      <label for="accessibility">Accessibility</label>
+      <select id="accessibility" formControlName="accessibility" required>
+        <option value="">Select accessibility</option>
+        <option value="private">Private</option>
+        <option value="public">Public</option>
+      </select>
+      <div *ngIf="campaignForm.get('accessibility')?.invalid && campaignForm.get('accessibility')?.touched" class="error">
+        Accessibility is required.
+      </div>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" [disabled]="campaignForm.invalid">Create Campaign</button>
+  </form>
+
+  <!-- Confirmation -->
+  <div *ngIf="successMessage" class="success">
+    {{ successMessage }}
+  </div>
+</div>
