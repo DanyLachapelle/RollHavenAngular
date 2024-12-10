@@ -62,10 +62,9 @@
         <div *ngFor="let campaign of publicCampaigns" class="campaign-tile">
           <h3>{{ campaign.name }}</h3>
           <p>{{ campaign.description }}</p>
-          <button (click)="viewCampaign(campaign.id)">Join Campaign</button>
+          <button *ngIf="campaign.id" (click)="viewCampaign(campaign.id)">Join Campaign</button>
         </div>
       </div>
-
       <!-- Message si aucune campagne n'est disponible -->
       <div *ngIf="!isLoading && publicCampaigns.length === 0">
         <p>No public campaigns available.</p>

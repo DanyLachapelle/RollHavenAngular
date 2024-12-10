@@ -1,14 +1,32 @@
 <div class="main-layout">
+  <!-- Barre latérale gauche -->
   <aside class="sidebar sidebar-left">
-    <app-character-list></app-character-list>
+    <app-character-list [campaignId]="campaignId"></app-character-list>
   </aside>
 
+  <!-- Zone principale -->
   <main class="display-area">
+    <div *ngIf="isLoading">Loading campaign details...</div>
+    <div *ngIf="campaignDetails">
+      <h1>{{ campaignDetails.name }}</h1>
+      <p>{{ campaignDetails.description }}</p>
+      <p><strong>Dungeon Master:</strong> {{ campaignDetails.dungeonMaster }}</p>
+      <ul>
+        <li *ngFor="let player of campaignDetails.players">
+          Player: {{ player.name }}
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!isLoading && !campaignDetails">
+      <p>Failed to load campaign details. Please try again later.</p>
+    </div>
+
     <app-display-area></app-display-area>
   </main>
 
+  <!-- Barre latérale droite -->
   <aside class="sidebar sidebar-right">
-    <app-person-list></app-person-list>
+    <app-person-list [campaignId]="campaignId"></app-person-list>
     <div class="create-button-container">
       <button (click)="createCharacter()" class="create-btn">Create player</button>
     </div>

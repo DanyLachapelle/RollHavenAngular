@@ -5,6 +5,7 @@ import { CampaignManagementComponent} from './campaign-management/campaign/campa
 import {InfoAccountComponent} from './info-account/info-account.component';
 import {LoginComponent} from "./user/login/login.component";
 import {CreateCampaignComponent} from './campaign-management/create-campaign/create-campaign.component';
+import {MainLayoutComponent} from './layouts/main-layout/main-layout.component';
 
 
 export const routes: Routes = [
@@ -13,4 +14,5 @@ export const routes: Routes = [
   { path: 'campaign-management', component: CampaignManagementComponent },
   { path: 'info-account', component: InfoAccountComponent },
   {path: 'create-campaign', component: CreateCampaignComponent },
+  { path: 'campaign/:id', component: MainLayoutComponent },
 ];

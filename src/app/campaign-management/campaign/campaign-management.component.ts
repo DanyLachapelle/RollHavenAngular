@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NgForOf, NgIf} from '@angular/common';
 import {CampaignManagementService} from '../campaign-management.service';
 import {CreateCampaignComponent} from '../create-campaign/create-campaign.component';
@@ -23,9 +23,12 @@ export class CampaignManagementComponent implements OnInit{
   errorMessage = '';
   isCreatingCampaign: boolean = false;
 
-  constructor(private router: Router, private campaignService: CampaignManagementService) {}
+  constructor(private router: Router, private campaignService: CampaignManagementService, private route: ActivatedRoute) {}
   ngOnInit(): void {
-    if (this.activeTab === 'public-campaigns') {
+    const campaignId = this.route.snapshot.paramMap.get('id');
+    if (campaignId) {
+      this.loadCampaignDetails(Number(campaignId));
+    } else if (this.activeTab === 'public-campaigns') {
       this.loadPublicCampaigns();
     }
   }
@@ -38,6 +41,21 @@ export class CampaignManagementComponent implements OnInit{
     }
   }
 
+  private loadCampaignDetails(campaignId: number): void {
+    this.isLoading = true;
+    this.campaignService.getCampaignById(campaignId).subscribe({
+      next: (campaign) => {
+        // Logique pour gérer les détails de la campagne
+        console.log('Campaign details:', campaign);
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = 'Failed to load campaign details.';
+        console.error(err);
+        this.isLoading = false;
+      },
+    });
+  }
 
 
 
@@ -50,6 +68,7 @@ export class CampaignManagementComponent implements OnInit{
     this.isLoading = true;
     this.campaignService.getPublicCampaigns().subscribe({
       next: (campaigns) => {
+        console.log('Loaded campaigns:', campaigns); // Log pour vérifier les campagnes
         this.publicCampaigns = campaigns;
         this.isLoading = false;
       },
@@ -61,12 +80,13 @@ export class CampaignManagementComponent implements OnInit{
     });
   }
 
-  viewCampaign(campaignId: number): void {
-    if (!campaignId) {
+
+  viewCampaign(campaignId: number | undefined): void {
+    if (campaignId == null || isNaN(campaignId)) {
       console.error('Campaign ID is undefined or invalid.');
       return;
     }
-    this.router.navigate(['/campaign-management', campaignId]); // Redirection vers une page de détails de campagne
+    this.router.navigate(['/campaign', campaignId]);
   }
 
   toggleCreateCampaign() {
