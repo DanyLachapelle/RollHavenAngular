@@ -1,0 +1,16 @@
+<div class="main-layout">
+  <aside class="sidebar sidebar-left">
+    <app-character-list></app-character-list>
+  </aside>
+
+  <main class="display-area">
+    <app-display-area></app-display-area>
+  </main>
+
+  <aside class="sidebar sidebar-right">
+    <app-person-list></app-person-list>
+    <div class="create-button-container">
+      <button (click)="createCharacter()" class="create-btn">Create player</button>
+    </div>
+  </aside>
+</div>
