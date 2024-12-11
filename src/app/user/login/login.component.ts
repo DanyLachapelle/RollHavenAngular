@@ -27,26 +27,33 @@ export class LoginComponent {
 
   loginUser() {
     if (this.form.valid) {
-      // Construct the user object for login (no need for 'pseudo' and 'role' at this stage)
       const loginData = {
         pseudo: this.form.value.pseudo,
         password: this.form.value.password
       };
 
-      // Call the login service method
       this.userService.login(loginData).subscribe({
         next: (response) => {
           console.log('User logged in successfully:', response);
           alert('Login successful!');
 
-          // Optionally store the token in localStorage or sessionStorage
+          // Stockage du token et des informations utilisateur dans le localStorage
           localStorage.setItem('authToken', response.token);
 
-          // Emit the logged-in user data if needed
+          // Stocker l'utilisateur sous la clé 'currentUser'
+          localStorage.setItem('currentUser', JSON.stringify({
+            id: response.id,
+            pseudo: response.pseudo,
+            email: response.email,
+            role: response.role,
+            isLoggedIn: response.isLoggedIn
+          }));
+
+          // Émettre l'utilisateur connecté si nécessaire
           this.userLoggedIn.emit(response);
           this.router.navigate(['/campaign-management']);
 
-          // Reset the form after login
+          // Réinitialiser le formulaire après la connexion
           this.form.reset();
         },
         error: (err) => {
@@ -58,4 +65,6 @@ export class LoginComponent {
       alert('The form is invalid. Please check your credentials.');
     }
   }
+
+
 }

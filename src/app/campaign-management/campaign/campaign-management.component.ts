@@ -23,6 +23,8 @@ export class CampaignManagementComponent implements OnInit{
   errorMessage = '';
   isCreatingCampaign: boolean = false;
 
+
+
   constructor(private router: Router, private campaignService: CampaignManagementService, private route: ActivatedRoute) {}
   ngOnInit(): void {
     const campaignId = this.route.snapshot.paramMap.get('id');
@@ -35,8 +37,9 @@ export class CampaignManagementComponent implements OnInit{
   selectTab(tab: string) {
     this.activeTab = tab;
     console.log(`Active tab: ${tab}`);
-    // Ajoute ici des actions spécifiques à chaque onglet si nécessaire
-    if (tab === 'public-campaigns') {
+
+    // Charger les campagnes publiques uniquement si elles ne sont pas déjà chargées
+    if (tab === 'public-campaigns' && this.publicCampaigns.length === 0) {
       this.loadPublicCampaigns();
     }
   }
@@ -57,8 +60,35 @@ export class CampaignManagementComponent implements OnInit{
     });
   }
 
+  joinCampaign(campaignId: number): void {
+    const userId = this.getCurrentUserId(); // Méthode pour obtenir l'ID de l'utilisateur connecté
+    if (!userId) {
+      console.error('User not logged in.');
+      alert('Please log in to join the campaign.');
+      this.router.navigate(['/login']);  // Redirige vers la page de login si l'utilisateur n'est pas connecté
+      return;
+    }
 
+    // Si l'utilisateur est connecté, on ajoute le joueur à la campagne
+    this.campaignService.addPlayerToCampaign(campaignId, userId).subscribe({
+      next: () => {
+        console.log(`User ${userId} successfully added to campaign ${campaignId}`);
+        alert('You have successfully joined the campaign!');
+        this.viewCampaign(campaignId);
+      },
+      error: (err) => {
+        console.error(`Failed to add user ${userId} to campaign ${campaignId}:`, err);
+        alert('Failed to join the campaign. Please try again later.');
+      },
+    });
+  }
 
+  private getCurrentUserId(): number | null {
+    // Remplace cette logique par la manière dont tu gères les utilisateurs connectés
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    console.log('Current User:', user);
+    return user?.id || null;
+  }
 
   viewAccountInfo() {
     this.router.navigate(['/info-account']);

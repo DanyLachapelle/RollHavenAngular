@@ -26,4 +26,15 @@ export class CampaignManagementService {
     return this._http.get<any>(url); // Récupère la campagne par ID
   }
 
+  getUsersByCampaignId(campaignId: number): Observable<any[]> {
+    // Utilisation de l'ID de la campagne pour obtenir les utilisateurs associés
+    const url = `${CampaignManagementService.BASE_URL}/${campaignId}/users`;
+    return this._http.get<any[]>(url); // Retourne les utilisateurs associés à la campagne
+  }
+
+  addPlayerToCampaign(campaignId: number, userId: number): Observable<void> {
+    const url = `http://localhost:5277/api/CampaignCommand/${campaignId}/addPlayer/${userId}`;
+    return this._http.post<void>(url, null); // POST request without body
+  }
+
 }
