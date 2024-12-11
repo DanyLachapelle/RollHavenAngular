@@ -1,0 +1,142 @@
+<div class="create-character-form">
+  <h2>Create Character</h2>
+
+  <form [formGroup]="sheetForm" (ngSubmit)="createCharacter()">
+    <!-- Nom  -->
+    <div class="form-group">
+      <label for="name">Character Name</label>
+      <input type="text" id="name" formControlName="name" placeholder="Enter your character name" required>
+      <div *ngIf="sheetForm.get('name')?.invalid && sheetForm.get('name')?.touched" class="error">
+        Name is required and must be at most 70 characters.
+      </div>
+    </div>
+
+    <!-- level  -->
+    <div class="form-group">
+      <label for="level">Level</label>
+      <input type="number" id="level" formControlName="level" placeholder="1" required>
+      <div *ngIf="sheetForm.get('level')?.invalid && sheetForm.get('level')?.touched" class="error">
+        Strength is required and be between 1 and 20.
+      </div>
+    </div>
+
+    <!-- Classe  -->
+    <div class="form-group">
+      <label for="class">Class</label>
+      <input type="text" id="class" formControlName="class" placeholder="Enter your character class" required>
+
+      <!--select id="class" formControlName="class" required>
+        <option value="{{class.id}}" *ngFor="let class from classes">
+          "{{class.name}}"
+        </option>
+      </select-->
+
+      <div *ngIf="sheetForm.get('class')?.invalid && sheetForm.get('class')?.touched" class="error">
+        Class is required.
+      </div>
+    </div>
+
+    <!-- Race  -->
+    <div class="form-group">
+      <label for="race">Race</label>
+      <input type="text" id="race" formControlName="race" placeholder="Enter your character race" required>
+
+      <!--select id="race" formControlName="race" required>
+        <option value="{{race.id}}" *ngFor="let race from races">
+          "{{race.name}}"
+        </option>
+      </select-->
+
+      <div *ngIf="sheetForm.get('race')?.invalid && sheetForm.get('race')?.touched" class="error">
+        Race is required.
+      </div>
+    </div>
+
+    <!-- Background  -->
+    <div class="form-group">
+      <label for="bg">Race</label>
+      <input type="text" id="bg" formControlName="bg" placeholder="Enter your character background" required>
+
+      <!--select id="bg" formControlName="bg" required>
+        <option value="{{background.id}}" *ngFor="let background from backgrounds">
+          "{{background.name}}"
+        </option>
+      </select-->
+
+      <div *ngIf="sheetForm.get('bg')?.invalid && sheetForm.get('bg')?.touched" class="error">
+        Background is required.
+      </div>
+    </div>
+
+    <!-- Stat  -->
+    <div class="form-group">
+      <label for="str">Strength</label>
+      <input type="number" id="str" formControlName="str" placeholder="10" required>
+      <div *ngIf="sheetForm.get('str')?.invalid && sheetForm.get('str')?.touched" class="error">
+        Strength is required and be between 6 and 20.
+      </div>
+
+      <label for="dex">Dexterity</label>
+      <input type="number" id="dex" formControlName="dex" placeholder="10" required>
+      <div *ngIf="sheetForm.get('dex')?.invalid && sheetForm.get('dex')?.touched" class="error">
+        Dexterity is required and be between 6 and 20.
+      </div>
+
+      <label for="con">Constitution</label>
+      <input type="number" id="con" formControlName="con" placeholder="10" required>
+      <div *ngIf="sheetForm.get('con')?.invalid && sheetForm.get('con')?.touched" class="error">
+        Constitution is required and be between 6 and 20.
+      </div>
+
+      <label for="int">Intelligence</label>
+      <input type="number" id="int" formControlName="int" placeholder="10" required>
+      <div *ngIf="sheetForm.get('int')?.invalid && sheetForm.get('int')?.touched" class="error">
+        Intelligence is required and be between 6 and 20.
+      </div>
+
+      <label for="wis">Wisdom</label>
+      <input type="number" id="wis" formControlName="wis" placeholder="10" required>
+      <div *ngIf="sheetForm.get('wis')?.invalid && sheetForm.get('wis')?.touched" class="error">
+        Wisdom is required and be between 6 and 20.
+      </div>
+
+      <label for="cha">Charisma</label>
+      <input type="number" id="cha" formControlName="cha" placeholder="10" required>
+      <div *ngIf="sheetForm.get('cha')?.invalid && sheetForm.get('cha')?.touched" class="error">
+        Charisma is required and be between 6 and 20.
+      </div>
+
+    </div>
+
+      <!-- weapon  -->
+      <div class="form-group">
+        <label for="nbWeapon">Number of weapon</label>
+        <input type="number" id="nbWeapon" formControlName="nbWeapon" placeholder="1" >
+
+
+        <div *ngFor="nbWeapon" class="nbWeapon">
+
+        </div>
+
+
+        <!--select id="weapon" formControlName="weapon" required>
+        <option value="{{weapon.id}}" *ngFor="let weapon from weapons">
+          "{{weapon.name}}"
+        </option>
+        </select-->
+
+      </div>
+
+
+    <!-- Spell -->
+
+
+    <!-- Bouton de soumission -->
+    <button type="submit" [disabled]="sheetForm.invalid">Create Campaign</button>
+  </form>
+
+  <!-- Confirmation -->
+  <div *ngIf="successMessage" class="success">
+    {{ successMessage }}
+  </div>
+</div>

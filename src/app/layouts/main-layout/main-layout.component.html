@@ -21,14 +21,19 @@
       <p>Failed to load campaign details. Please try again later.</p>
     </div>
 
-    <app-display-area></app-display-area>
+    <div *ngIf="isCreatingCharacter">
+      <app-create-character-sheet (CharacterCreated)="loadYourCharacter()"></app-create-character-sheet>
+    </div>
+
+    <app-display-area>
+    </app-display-area>
   </main>
 
   <!-- Barre latérale droite -->
   <aside class="sidebar sidebar-right">
     <app-person-list [campaignId]="campaignId"></app-person-list>
     <div class="create-button-container">
-      <button (click)="createCharacter()" class="create-btn">Create player</button>
+      <button (click)="toggleCreateCharacter()" class="create-btn">Create character</button>
     </div>
   </aside>
 </div>

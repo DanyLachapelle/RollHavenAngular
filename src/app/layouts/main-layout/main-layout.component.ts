@@ -5,6 +5,7 @@ import {PersonListComponent} from './components/person-list/person-list.componen
 import {ActivatedRoute} from '@angular/router';
 import {CampaignManagementService} from '../../campaign-management/campaign-management.service';
 import {NgForOf, NgIf} from '@angular/common';
+import {CreateCampaignComponent} from '../../campaign-management/create-campaign/create-campaign.component';
 
 @Component({
   selector: 'app-main-layout',
@@ -13,7 +14,8 @@ import {NgForOf, NgIf} from '@angular/common';
     DisplayAreaComponent,
     PersonListComponent,
     NgIf,
-    NgForOf
+    NgForOf,
+    CreateCampaignComponent
   ],
   templateUrl: './main-layout.component.html',
   standalone: true,
@@ -23,6 +25,8 @@ export class MainLayoutComponent implements OnInit {
   campaignId: number | null = null;
   campaignDetails: any = null; // Stocke les détails de la campagne
   isLoading: boolean = false;
+  isCreatingCharacter: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -50,6 +54,15 @@ export class MainLayoutComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  toggleCreateCharacter() {
+    this.isCreatingCharacter = !this.isCreatingCharacter;
+  }
+
+  loadYourCharacter() {
+    // Logique pour recharger les campagnes de l'utilisateur (vous pouvez ajouter un appel API ici)
+    console.log('Reload campaigns after creation');
   }
   createCharacter() {
     console.log('Création d’un nouveau personnage');
