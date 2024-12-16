@@ -1,13 +1,23 @@
 <div class="campaign-management">
   <div class="left-panel">
+
     <div class="campaign-tabs">
       <div
         class="tab"
-        [class.active]="activeTab === 'your-campaigns'"
-        (click)="selectTab('your-campaigns')"
+        [class.active]="activeTab === 'show-campaigns'"
+        (click)="selectTab('show-campaigns')"
       >
-        <span>Your Campaigns</span>
+        <span>Show Campaigns</span>
       </div>
+
+      <div
+        class="tab"
+        [class.active]="activeTab === 'create-campaigns'"
+        (click)="selectTab('create-campaigns')"
+      >
+        <span>Create Campaigns</span>
+      </div>
+
       <div
         class="tab"
         [class.active]="activeTab === 'public-campaigns'"
@@ -17,8 +27,33 @@
       </div>
     </div>
 
-    <div *ngIf="activeTab === 'your-campaigns'" class="campaign-list">
+    <div *ngIf="activeTab === 'show-campaigns'" class="campaign-list">
       <h2>Your Campaigns</h2>
+
+      <!-- Indicateur de chargement -->
+      <div *ngIf="isLoading">Loading your campaigns...</div>
+
+      <!-- Gestion des erreurs -->
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+      <!-- Liste des campagnes sous forme de tuiles -->
+      <div class="campaign-grid" *ngIf="!isLoading && userCampaigns.length > 0">
+        <div *ngFor="let campaign of userCampaigns" class="campaign-tile">
+          <h3>{{ campaign.name }}</h3>
+          <p>{{ campaign.description }}</p>
+          <!--<button (click)="manageCampaign(campaign.id)">Manage Campaign</button>-->
+          <button *ngIf="campaign.id" (click)="viewCampaign(campaign.id)">enter Campaign</button>
+        </div>
+      </div>
+
+      <!-- Message si aucune campagne n'est disponible -->
+      <div *ngIf="!isLoading && userCampaigns.length === 0">
+        <p>You are not part of any campaigns.</p>
+      </div>
+    </div>
+
+    <div *ngIf="activeTab === 'create-campaigns'" class="campaign-list">
+      <h2>Create Campaigns</h2>
 
       <!-- Tuile pour créer une nouvelle campagne -->
       <div class="campaign-item create-tile">
@@ -37,17 +72,7 @@
         </li>
       </ul>
     </div>
-   <!--
-    <div *ngIf="activeTab === 'public-campaigns'" class="campaign-list">
-      <h2>Public Campaigns</h2>
-      <ul>
-        <li>
 
-        </li>
-      </ul>
-    </div>
-  </div>
--->
     <div *ngIf="activeTab === 'public-campaigns'" class="campaign-list">
       <h2>Public Campaigns</h2>
 
@@ -71,6 +96,7 @@
       </div>
     </div>
   </div>
+
 
   <div class="right-panel join-campaign">
     <div class="account-info-button">

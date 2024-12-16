@@ -3,11 +3,12 @@
     <div class="campaign-tabs">
       <div
         class="tab"
-        [class.active]="activeTab === 'your-campaigns'"
-        (click)="selectTab('your-campaigns')"
+        [class.active]="activeTab === 'create-campaigns'"
+        (click)="selectTab('create-campaigns')"
       >
-        <span>Your Campaigns</span>
+        <span>Create Campaigns</span>
       </div>
+
       <div
         class="tab"
         [class.active]="activeTab === 'public-campaigns'"
@@ -17,8 +18,17 @@
       </div>
     </div>
 
-    <div *ngIf="activeTab === 'your-campaigns'" class="campaign-list">
-      <h2>Your Campaigns</h2>
+    <div
+      class="tab"
+      [class.active]="activeTab === 'show-campaigns'"
+      (click)="selectTab('show-campaigns')"
+    >
+      <span>Show Campaigns</span>
+    </div>
+  </div>
+
+    <div *ngIf="activeTab === 'create-campaigns'" class="campaign-list">
+      <h2>Create Campaigns</h2>
       <ul>
         <li>
           <!-- Placeholder for campaigns -->
@@ -35,6 +45,16 @@
       </ul>
     </div>
   </div>
+
+<div *ngIf="activeTab === 'show-campaigns'" class="campaign-list">
+  <h2>Public Campaigns</h2>
+  <ul>
+    <li>
+      <!-- Placeholder for public campaigns -->
+    </li>
+  </ul>
+</div>
+
 
   <div class="right-panel join-campaign">
     <div class="account-info-button">
@@ -54,4 +74,4 @@
       <button type="submit">Join</button>
     </form>
   </div>
-</div>
+

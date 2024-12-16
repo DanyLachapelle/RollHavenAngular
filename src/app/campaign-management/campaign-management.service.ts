@@ -37,4 +37,8 @@ export class CampaignManagementService {
     return this._http.post<void>(url, null); // POST request without body
   }
 
+  getYourCampaigns(userId: number): Observable<any[]> {
+    return this._http.get<any[]>(`http://localhost:5277/users/${userId}/campaigns`);
+  }
+
 }

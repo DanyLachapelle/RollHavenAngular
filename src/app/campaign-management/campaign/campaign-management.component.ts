@@ -17,11 +17,13 @@ import {CreateCampaignComponent} from '../create-campaign/create-campaign.compon
 })
 export class CampaignManagementComponent implements OnInit{
 
-  activeTab: string = 'your-campaigns'; // Par défaut sur "Your Campaigns"
+  activeTab: string = 'show-campaigns'; // Par défaut sur "Your Campaigns"
   publicCampaigns: any[] = [];
+  userCampaigns: any = [];
   isLoading = false;
   errorMessage = '';
   isCreatingCampaign: boolean = false;
+
 
 
 
@@ -32,17 +34,22 @@ export class CampaignManagementComponent implements OnInit{
       this.loadCampaignDetails(Number(campaignId));
     } else if (this.activeTab === 'public-campaigns') {
       this.loadPublicCampaigns();
+    } else if (this.activeTab === 'show-campaigns') {
+      this.loadYourCampaigns();
     }
   }
+
   selectTab(tab: string) {
     this.activeTab = tab;
     console.log(`Active tab: ${tab}`);
 
-    // Charger les campagnes publiques uniquement si elles ne sont pas déjà chargées
     if (tab === 'public-campaigns' && this.publicCampaigns.length === 0) {
       this.loadPublicCampaigns();
+    } else if (tab === 'show-campaigns' && this.userCampaigns.length === 0) {
+      this.loadYourCampaigns();
     }
   }
+
 
   private loadCampaignDetails(campaignId: number): void {
     this.isLoading = true;
@@ -110,6 +117,29 @@ export class CampaignManagementComponent implements OnInit{
     });
   }
 
+  loadYourCampaigns() {
+    const userId = this.getCurrentUserId(); // Obtient l'ID de l'utilisateur connecté
+    if (!userId) {
+      console.error('User not logged in.');
+      alert('Please log in to view your campaigns.');
+      this.router.navigate(['/login']); // Redirige vers la page de login si l'utilisateur n'est pas connecté
+      return;
+    }
+
+    this.isLoading = true;
+    this.campaignService.getYourCampaigns(userId).subscribe({
+      next: (campaigns) => {
+        console.log('Loaded user campaigns:', campaigns);
+        this.userCampaigns = campaigns;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = 'Failed to load your campaigns.';
+        console.error(err);
+        this.isLoading = false;
+      },
+    });
+  }
 
   viewCampaign(campaignId: number | undefined): void {
     if (campaignId == null || isNaN(campaignId)) {
@@ -123,8 +153,6 @@ export class CampaignManagementComponent implements OnInit{
     this.isCreatingCampaign = !this.isCreatingCampaign;
   }
 
-  loadYourCampaigns() {
-    // Logique pour recharger les campagnes de l'utilisateur (vous pouvez ajouter un appel API ici)
-    console.log('Reload campaigns after creation');
-  }
+
+
 }
