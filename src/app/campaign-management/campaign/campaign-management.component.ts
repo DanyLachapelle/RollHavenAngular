@@ -100,14 +100,74 @@ export class CampaignManagementComponent implements OnInit{
   viewAccountInfo() {
     this.router.navigate(['/info-account']);
   }
-
+/*
   private loadPublicCampaigns() {
     this.isLoading = true;
+    const userId = this.getCurrentUserId(); // Obtenir l'ID de l'utilisateur
+
+    if (!userId) {
+      console.error('User not logged in.');
+      alert('Please log in to view campaigns.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
     this.campaignService.getPublicCampaigns().subscribe({
       next: (campaigns) => {
         console.log('Loaded campaigns:', campaigns); // Log pour vérifier les campagnes
         this.publicCampaigns = campaigns;
         this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = 'Failed to load public campaigns.';
+        console.error(err);
+        this.isLoading = false;
+      }
+    });
+  }
+*/
+
+  private loadPublicCampaigns() {
+    this.isLoading = true;
+    const userId = this.getCurrentUserId(); // Obtenir l'ID de l'utilisateur
+
+    if (!userId) {
+      console.error('User not logged in.');
+      alert('Please log in to view campaigns.');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // Récupérer les campagnes publiques
+    this.campaignService.getPublicCampaigns().subscribe({
+      next: (campaigns) => {
+        console.log('Loaded public campaigns:', campaigns);
+
+        // Récupérer les campagnes auxquelles l'utilisateur appartient
+        this.campaignService.getYourCampaigns(userId).subscribe({
+          next: (userCampaigns) => {
+            // Extraire les IDs des campagnes auxquelles l'utilisateur appartient
+            const userCampaignIds = userCampaigns.map((campaign: any) => campaign.id);
+
+            // Créer un tableau filtré de campagnes publiques auxquelles l'utilisateur ne participe pas
+            const filteredCampaigns = [];
+            for (let i = 0; i < campaigns.length; i++) {
+              const campaign = campaigns[i];
+              if (campaign.accessibility === 'public' && !userCampaignIds.includes(campaign.id)) {
+                filteredCampaigns.push(campaign);  // Si l'utilisateur n'est pas dans la campagne, on l'ajoute
+              }
+            }
+
+            // Mettre à jour la liste des campagnes publiques filtrées
+            this.publicCampaigns = filteredCampaigns;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            this.errorMessage = 'Failed to load your campaigns.';
+            console.error(err);
+            this.isLoading = false;
+          }
+        });
       },
       error: (err) => {
         this.errorMessage = 'Failed to load public campaigns.';

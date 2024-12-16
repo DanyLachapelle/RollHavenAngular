@@ -1,6 +1,15 @@
 <div class="campaign-management">
   <div class="left-panel">
+
     <div class="campaign-tabs">
+      <div
+        class="tab"
+        [class.active]="activeTab === 'show-campaigns'"
+        (click)="selectTab('show-campaigns')"
+      >
+        <span>Show Campaigns</span>
+      </div>
+
       <div
         class="tab"
         [class.active]="activeTab === 'create-campaigns'"
@@ -18,42 +27,75 @@
       </div>
     </div>
 
-    <div
-      class="tab"
-      [class.active]="activeTab === 'show-campaigns'"
-      (click)="selectTab('show-campaigns')"
-    >
-      <span>Show Campaigns</span>
+    <div *ngIf="activeTab === 'show-campaigns'" class="campaign-list">
+      <h2>Your Campaigns</h2>
+
+      <!-- Indicateur de chargement -->
+      <div *ngIf="isLoading">Loading your campaigns...</div>
+
+      <!-- Gestion des erreurs -->
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+      <!-- Liste des campagnes sous forme de tuiles -->
+      <div class="campaign-grid" *ngIf="!isLoading && userCampaigns.length > 0">
+        <div *ngFor="let campaign of userCampaigns" class="campaign-tile">
+          <h3>{{ campaign.name }}</h3>
+          <p>{{ campaign.description }}</p>
+          <!--<button (click)="manageCampaign(campaign.id)">Manage Campaign</button>-->
+          <button *ngIf="campaign.id" (click)="viewCampaign(campaign.id)">enter Campaign</button>
+        </div>
+      </div>
+
+      <!-- Message si aucune campagne n'est disponible -->
+      <div *ngIf="!isLoading && userCampaigns.length === 0">
+        <p>You are not part of any campaigns.</p>
+      </div>
     </div>
-  </div>
 
     <div *ngIf="activeTab === 'create-campaigns'" class="campaign-list">
       <h2>Create Campaigns</h2>
+
+      <!-- Tuile pour créer une nouvelle campagne -->
+      <div class="campaign-item create-tile">
+        <button (click)="toggleCreateCampaign()">Create New Campaign</button>
+      </div>
+
+      <!-- Si l'utilisateur clique sur "Create New Campaign", afficher le formulaire -->
+      <div *ngIf="isCreatingCampaign">
+        <app-create-campaign (campaignCreated)="loadYourCampaigns()"></app-create-campaign>
+      </div>
+
+      <!-- Liste des campagnes existantes -->
       <ul>
         <li>
-          <!-- Placeholder for campaigns -->
+          <!-- Placeholder for your campaigns -->
         </li>
       </ul>
     </div>
 
     <div *ngIf="activeTab === 'public-campaigns'" class="campaign-list">
       <h2>Public Campaigns</h2>
-      <ul>
-        <li>
-          <!-- Placeholder for public campaigns -->
-        </li>
-      </ul>
+
+      <!-- Indicateur de chargement -->
+      <div *ngIf="isLoading">Loading public campaigns...</div>
+
+      <!-- Gestion des erreurs -->
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+      <!-- Liste des campagnes sous forme de tuiles -->
+      <div class="campaign-grid" *ngIf="!isLoading && publicCampaigns.length > 0">
+        <div *ngFor="let campaign of publicCampaigns" class="campaign-tile">
+          <h3>{{ campaign.name }}</h3>
+          <p>{{ campaign.description }}</p>
+          <button *ngIf="campaign.id" (click)="joinCampaign(campaign.id)">Join Campaign</button>
+        </div>
+      </div>
+      <!-- Message si aucune campagne n'est disponible -->
+      <div *ngIf="!isLoading && publicCampaigns.length === 0">
+        <p>No public campaigns available.</p>
+      </div>
     </div>
   </div>
-
-<div *ngIf="activeTab === 'show-campaigns'" class="campaign-list">
-  <h2>Public Campaigns</h2>
-  <ul>
-    <li>
-      <!-- Placeholder for public campaigns -->
-    </li>
-  </ul>
-</div>
 
 
   <div class="right-panel join-campaign">
@@ -74,4 +116,5 @@
       <button type="submit">Join</button>
     </form>
   </div>
+</div>
 
