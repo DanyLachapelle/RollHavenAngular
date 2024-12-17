@@ -11,11 +11,11 @@ export const routes: Routes = [
   { path: '', component: AppComponent },
   {
     path: 'login',
-    loadComponent: () => import('./user/login/lazy/lazy.component').then(m => m.LazyLoginComponent),
+    loadComponent: () => import('./user/login/login.component').then(m => m.LoginComponent),
   },
   {
     path: 'register',
-    loadComponent: () => import('./user/register/lazy/lazy.component').then(m => m.LazyRegisterComponent),
+    loadComponent: () => import('./user/register/register.component').then(m => m.RegisterComponent),
   },
   { path: 'campaign-management', component: CampaignManagementComponent },
   { path: 'info-account', component: InfoAccountComponent },
