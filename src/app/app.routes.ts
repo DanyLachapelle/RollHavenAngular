@@ -8,7 +8,11 @@ import {AppComponent} from './app.component';
 
 
 export const routes: Routes = [
-  { path: '', component: AppComponent },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
   {
     path: 'login',
     loadComponent: () => import('./user/login/login.component').then(m => m.LoginComponent),
