@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global body styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, #5a3e9b, #ffffff);
+  height: 100vh;
+  color: #333;
+}
+
+/* Basic link styling... */
+a {
+  text-decoration: none;
+  color: #5a3e9b;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Input fields... */
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+/* Button styling */
+button {
+  background-color: #5a3e9b;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #ccc;
+}
+
+button:hover {
+  background-color: #7d57cc;
+}
+
+/* Error message */
+.error {
+  color: #dc3545;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+
+/* Success message */
+.success {
+  margin-top: 20px;
+  color: #28a745;
+  font-size: 1em;
+}
+
+/* Form group */
+.form-group {
+  margin-bottom: 15px;
+}
+
+/* Form labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import {HomeComponent} from './home/home.component';
 import { RegisterComponent } from './user/register/register.component';
 import { CampaignManagementComponent} from './campaign-management/campaign/campaign-management.component';
 import {InfoAccountComponent} from './info-account/info-account.component';
