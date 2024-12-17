@@ -1,13 +1,26 @@
+
 .person-list {
   list-style: none;
   padding: 0;
   margin: 0;
+}
 
-  li {
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    background: #fff;
-    border: 1px solid #eee;
-    border-radius: 4px;
-  }
+.person-list li {
+  padding: 0.8rem;
+  margin-bottom: 0.6rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.person-list li:hover {
+  background-color: #f7f7f7;
+  transform: scale(1.02);
+}
+
+.person-list li span {
+  font-weight: bold;
+  color: #5a3e9b;
 }
