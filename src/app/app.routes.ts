@@ -13,7 +13,10 @@ export const routes: Routes = [
     path: 'login',
     loadComponent: () => import('./user/login/lazy/lazy.component').then(m => m.LazyLoginComponent),
   },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: 'register',
+    loadComponent: () => import('./user/register/lazy/lazy.component').then(m => m.LazyRegisterComponent),
+  },
   { path: 'campaign-management', component: CampaignManagementComponent },
   { path: 'info-account', component: InfoAccountComponent },
   { path: 'create-campaign', component: CreateCampaignComponent },
