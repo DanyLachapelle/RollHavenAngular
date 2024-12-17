@@ -6,7 +6,7 @@ import {CreateCampaignComponent} from '../create-campaign/create-campaign.compon
 import {FormsModule} from '@angular/forms';
 
 @Component({
-  selector: 'app-campaign-management',
+  selector: 'app-campaign-management-management',
   imports: [
     NgIf,
     NgForOf,
@@ -64,7 +64,7 @@ export class CampaignManagementComponent implements OnInit{
         this.isLoading = false;
       },
       error: (err) => {
-        this.errorMessage = 'Failed to load campaign details.';
+        this.errorMessage = 'Failed to load campaign-management details.';
         console.error(err);
         this.isLoading = false;
       },
@@ -75,7 +75,7 @@ export class CampaignManagementComponent implements OnInit{
     const userId = this.getCurrentUserId(); // Méthode pour obtenir l'ID de l'utilisateur connecté
     if (!userId) {
       console.error('User not logged in.');
-      alert('Please log in to join the campaign.');
+      alert('Please log in to join the campaign-management.');
       this.router.navigate(['/login']);  // Redirige vers la page de login si l'utilisateur n'est pas connecté
       return;
     }
@@ -84,12 +84,12 @@ export class CampaignManagementComponent implements OnInit{
     this.campaignService.addPlayerToCampaign(campaignId, userId).subscribe({
       next: () => {
         console.log(`User ${userId} successfully added to campaign ${campaignId}`);
-        alert('You have successfully joined the campaign!');
+        alert('You have successfully joined the campaign-management!');
         this.viewCampaign(campaignId);
       },
       error: (err) => {
         console.error(`Failed to add user ${userId} to campaign ${campaignId}:`, err);
-        alert('Failed to join the campaign. Please try again later.');
+        alert('Failed to join the campaign-management. Please try again later.');
       },
     });
   }
@@ -196,7 +196,7 @@ export class CampaignManagementComponent implements OnInit{
     const userId = this.getCurrentUserId(); // Méthode pour obtenir l'ID de l'utilisateur connecté
     if (!userId) {
       console.error('User not logged in.');
-      alert('Please log in to join the campaign.');
+      alert('Please log in to join the campaign-management.');
       this.router.navigate(['/login']);  // Redirige vers la page de login si l'utilisateur n'est pas connecté
       return;
     }
@@ -206,13 +206,13 @@ export class CampaignManagementComponent implements OnInit{
     this.campaignService.joinCampaignByCode(this.invitationCode, userId).subscribe({
       next: (campaign) => {
         console.log(`Successfully joined campaign: ${campaign.name}`);
-        alert('You have successfully joined the campaign!');
+        alert('You have successfully joined the campaign-management!');
         const campaignId = this.response.id;
         this.router.navigate(['/campaign', campaignId]);
       },
       error: (err) => {
-        console.error('Error joining campaign:', err);
-        this.errorMessage = 'Failed to join the campaign. Please try again later.';
+        console.error('Error joining campaign-management:', err);
+        this.errorMessage = 'Failed to join the campaign-management. Please try again later.';
         alert(this.errorMessage);
         this.isLoading = false;
       }

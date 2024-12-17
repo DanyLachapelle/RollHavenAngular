@@ -15,11 +15,11 @@ import {NgForOf, NgIf} from '@angular/common';
     NgIf,
     NgForOf
   ],
-  templateUrl: './main-layout.component.html',
+  templateUrl: './campaign.component.html',
   standalone: true,
-  styleUrl: './main-layout.component.scss'
+  styleUrl: './campaign.component.scss'
 })
-export class MainLayoutComponent implements OnInit {
+export class CampaignComponent implements OnInit {
   campaignId: number | null = null;
   campaignDetails: any = null; // Stocke les détails de la campagne
   isLoading: boolean = false;
@@ -46,7 +46,7 @@ export class MainLayoutComponent implements OnInit {
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Failed to load campaign details:', err);
+        console.error('Failed to load campaign-management details:', err);
         this.isLoading = false;
       },
     });

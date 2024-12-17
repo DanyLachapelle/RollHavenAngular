@@ -39,7 +39,7 @@ export class DisplayAreaComponent implements OnInit{
         this.isLoading = false;
       },
       error: (err) => {
-        console.error('Failed to load campaign details:', err);
+        console.error('Failed to load campaign-management details:', err);
         this.isLoading = false;
       },
     });

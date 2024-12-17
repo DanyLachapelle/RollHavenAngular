@@ -41,7 +41,7 @@
         <div *ngFor="let campaign of userCampaigns" class="campaign-tile">
           <h3>{{ campaign.name }}</h3>
           <p>{{ campaign.description }}</p>
-          <!--<button (click)="manageCampaign(campaign.id)">Manage Campaign</button>-->
+          <!--<button (click)="manageCampaign(campaign-management.id)">Manage Campaign</button>-->
           <button *ngIf="campaign.id" (click)="viewCampaign(campaign.id)">enter Campaign</button>
         </div>
       </div>

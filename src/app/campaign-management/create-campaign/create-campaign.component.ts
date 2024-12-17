@@ -57,11 +57,11 @@ export class CreateCampaignComponent {
           this.campaignForm.reset(); // Réinitialiser le formulaire
         },
         error: (err) => {
-          console.error('Error creating campaign:', err);
-          if (err.error && err.error.message === 'This campaign name already exists.') {
-            this.successMessage = 'This campaign name already exists. Please choose another one.';
+          console.error('Error creating campaign-management:', err);
+          if (err.error && err.error.message === 'This campaign-management name already exists.') {
+            this.successMessage = 'This campaign-management name already exists. Please choose another one.';
           } else {
-            this.successMessage = 'An error occurred while creating the campaign.';
+            this.successMessage = 'An error occurred while creating the campaign-management.';
           }
         }
       });
