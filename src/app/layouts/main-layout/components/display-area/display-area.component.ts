@@ -16,6 +16,7 @@ export class DisplayAreaComponent implements OnInit{
   campaignId: number = 0;
   campaignDetails: any = null;
   isLoading: boolean = true;
+  currentUserRoleInCampaign: string = '';
 
   constructor(
     private campaignService: CampaignManagementService,
@@ -23,25 +24,46 @@ export class DisplayAreaComponent implements OnInit{
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.campaignId = Number(id);
-      this.loadCampaignDetails(this.campaignId); // Chargez les données si nécessaire
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
+      this.campaignId = parseInt(idParam, 10);
+      this.loadCampaignDetails();
+      this.checkCurrentUserRole();
     }
   }
 
-  // Fonction pour récupérer les détails de la campagne
-  loadCampaignDetails(campaignId: number): void {
-    this.isLoading = true;
-    this.campaignService.getCampaignById(campaignId).subscribe({
-      next: (campaign) => {
-        this.campaignDetails = campaign;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        console.error('Failed to load campaign details:', err);
-        this.isLoading = false;
-      },
-    });
+  loadCampaignDetails(): void {
+    this.campaignService.getCampaignById(this.campaignId).subscribe(
+        (details) => {
+          this.campaignDetails = details;
+          this.isLoading = false;
+        },
+        (error) => {
+          console.error('Error fetching campaign details:', error);
+          this.isLoading = false;
+        }
+    );
+  }
+
+
+  checkCurrentUserRole(): void {
+    const currentUserId = this.getCurrentUserId();
+    if (!currentUserId) {
+      console.error('No user is currently logged in.');
+      return;
+    }
+
+    // Récupérer les utilisateurs de la campagne pour trouver le rôle
+    this.campaignService.getUsersByCampaignId(this.campaignId).subscribe(
+        (users) => {
+          const userInCampaign = users.find((user) => user.userId === currentUserId);
+          this.currentUserRoleInCampaign = userInCampaign ? userInCampaign.role : null;
+        },
+        (error) => console.error('Error fetching campaign users:', error)
+    );
+  }
+  private getCurrentUserId(): number | null {
+    const user = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    return user?.id || null; // Assurez-vous que l'utilisateur est connecté
   }
 }

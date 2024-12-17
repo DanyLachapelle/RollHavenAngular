@@ -1,3 +1,10 @@
+<div class="create-button-container">
+    <!-- Bouton pour quitter la campagne -->
+    <button *ngIf="currentUserRoleInCampaign === 'PC'" class="create-btn" (click)="leaveCampaign()">Leave campaign</button>
+
+    <!-- Bouton pour supprimer la campagne, visible uniquement si l'utilisateur est DM dans la campagne -->
+    <button *ngIf="currentUserRoleInCampaign === 'DM'" class="create-btn" (click)="deleteCampaign()">Delete campaign</button>
+</div>
 <h3>Liste Personne</h3>
 <ul class="person-list">
   <li *ngFor="let person of people">

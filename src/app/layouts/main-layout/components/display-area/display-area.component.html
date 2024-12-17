@@ -5,11 +5,13 @@
   <div *ngIf="isLoading">Chargement des détails de la campagne...</div>
 
   <!-- Affichage des détails de la campagne -->
-  <div *ngIf="campaignDetails">
-    <h2>{{ campaignDetails.name }}</h2>
-    <p>{{campaignDetails.invitation_code}}</p>
-    <p>{{campaignDetails.accessibility}}</p>
-  </div>
+      <div *ngIf="campaignDetails">
+        <h2>{{ campaignDetails.name }}</h2>
+          <p *ngIf="currentUserRoleInCampaign === 'DM'">
+              Invitation code : {{ campaignDetails.invitation_code }}
+          </p>
+        <p>{{campaignDetails.accessibility}}</p>
+      </div>
 
   <!-- Message d'erreur si les détails de la campagne ne peuvent pas être récupérés -->
   <div *ngIf="!isLoading && !campaignDetails">

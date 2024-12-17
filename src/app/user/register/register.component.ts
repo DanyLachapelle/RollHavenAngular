@@ -3,6 +3,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {User} from '../user';
 import {NgIf} from '@angular/common';
 import {UserService} from '../user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +22,7 @@ export class RegisterComponent {
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     role: new FormControl('user', [Validators.required])
   });
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,private router: Router) {}
   @Output()
   userCreated: EventEmitter<User> = new EventEmitter();
 
@@ -41,7 +42,9 @@ export class RegisterComponent {
       this.userService.create(newUser).subscribe({
         next: (createdUser) => {
           console.log('User successfully created:', createdUser);
+          localStorage.setItem('currentUser', JSON.stringify(createdUser));
           alert('User successfully created!');
+          this.router.navigate(['/campaign-management']);
           this.form.reset();
         },
         error: (err) => {

@@ -48,4 +48,11 @@ export class CampaignManagementService {
     return this._http.post<any>(`http://localhost:5277/api/CampaignCommand/${invitationCode}/join/${userId}`,null);
   }
 
+  leaveCampaign(campaignId: number, userId: number): Observable<void> {
+    return this._http.delete<void>(`http://localhost:5277/api/CampaignCommand/${campaignId}/leave/${userId}`);
+  }
+
+  deleteCampaign(campaignId: number) {
+    return this._http.delete<void>(`http://localhost:5277/api/CampaignCommand/campaigns/${campaignId}`);
+  }
 }
