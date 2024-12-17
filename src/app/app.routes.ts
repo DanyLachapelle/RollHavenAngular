@@ -32,4 +32,8 @@ export const routes: Routes = [
     path: 'create-campaign',
     loadComponent: () => import('./campaign-management/create-campaign/create-campaign.component').then(m => m.CreateCampaignComponent),
   },
+  {
+    path: 'campaign/:id',
+    loadComponent: () => import('./layouts/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
+  },
 ];
