@@ -20,4 +20,14 @@ export class UserService {
   login(loginData: { pseudo: string; password: string }): Observable<any> {
     return this._http.post<any>(UserService.LOGIN_URL, loginData);
   }
+
+  setUserSession(response: any): void {
+    // Sauvegarde du token et des détails de l'utilisateur dans localStorage
+    localStorage.setItem('authToken', response.token);
+    localStorage.setItem('currentUser', JSON.stringify(response.user));
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('authToken');
+  }
 }
