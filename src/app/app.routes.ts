@@ -17,7 +17,16 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./user/register/register.component').then(m => m.RegisterComponent),
   },
-  { path: 'campaign-management', component: CampaignManagementComponent },
-  { path: 'info-account', component: InfoAccountComponent },
-  { path: 'create-campaign', component: CreateCampaignComponent },
+  {
+    path: 'campaign-management',
+    loadComponent: () => import('./campaign-management/campaign/campaign-management.component').then(m => m.CampaignManagementComponent),
+  },
+  {
+    path: 'info-account',
+    loadComponent: () => import('./info-account/info-account.component').then(m => m.InfoAccountComponent),
+  },
+  {
+    path: 'create-campaign',
+    loadComponent: () => import('./campaign-management/create-campaign/create-campaign.component').then(m => m.CreateCampaignComponent),
+  },
 ];
