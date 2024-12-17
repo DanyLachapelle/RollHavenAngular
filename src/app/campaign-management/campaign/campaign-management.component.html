@@ -103,14 +103,15 @@
       <button (click)="viewAccountInfo()">Account Information</button>
     </div>
     <h2>Join a Campaign</h2>
-    <form>
+
+    <form (ngSubmit)="joinCampaignByCode()">
       <div class="form-group">
         <input
           type="text"
-          id="campaign-id"
-          placeholder="Enter the campaign ID"
-          name="campaign-id"
-          required
+          [(ngModel)]="invitationCode"
+        name="invitationCode"
+        placeholder="Enter the campaign invitation code"
+        required
         />
       </div>
       <button type="submit">Join</button>

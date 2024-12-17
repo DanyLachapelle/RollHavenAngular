@@ -6,20 +6,7 @@
 
   <!-- Zone principale -->
   <main class="display-area">
-    <div *ngIf="isLoading">Loading campaign details...</div>
-    <div *ngIf="campaignDetails">
-      <h1>{{ campaignDetails.name }}</h1>
-      <p>{{ campaignDetails.description }}</p>
-      <p><strong>Dungeon Master:</strong> {{ campaignDetails.dungeonMaster }}</p>
-      <ul>
-        <li *ngFor="let player of campaignDetails.players">
-          Player: {{ player.name }}
-        </li>
-      </ul>
-    </div>
-    <div *ngIf="!isLoading && !campaignDetails">
-      <p>Failed to load campaign details. Please try again later.</p>
-    </div>
+
 
     <app-display-area></app-display-area>
   </main>

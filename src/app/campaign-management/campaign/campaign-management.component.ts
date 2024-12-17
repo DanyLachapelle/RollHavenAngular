@@ -3,13 +3,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NgForOf, NgIf} from '@angular/common';
 import {CampaignManagementService} from '../campaign-management.service';
 import {CreateCampaignComponent} from '../create-campaign/create-campaign.component';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-campaign-management',
   imports: [
     NgIf,
     NgForOf,
-    CreateCampaignComponent
+    CreateCampaignComponent,
+    FormsModule
   ],
   templateUrl: './campaign-management.component.html',
   standalone: true,
@@ -23,6 +25,8 @@ export class CampaignManagementComponent implements OnInit{
   isLoading = false;
   errorMessage = '';
   isCreatingCampaign: boolean = false;
+  invitationCode: string='';
+  private response: any;
 
 
 
@@ -100,32 +104,6 @@ export class CampaignManagementComponent implements OnInit{
   viewAccountInfo() {
     this.router.navigate(['/info-account']);
   }
-/*
-  private loadPublicCampaigns() {
-    this.isLoading = true;
-    const userId = this.getCurrentUserId(); // Obtenir l'ID de l'utilisateur
-
-    if (!userId) {
-      console.error('User not logged in.');
-      alert('Please log in to view campaigns.');
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    this.campaignService.getPublicCampaigns().subscribe({
-      next: (campaigns) => {
-        console.log('Loaded campaigns:', campaigns); // Log pour vérifier les campagnes
-        this.publicCampaigns = campaigns;
-        this.isLoading = false;
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to load public campaigns.';
-        console.error(err);
-        this.isLoading = false;
-      }
-    });
-  }
-*/
 
   private loadPublicCampaigns() {
     this.isLoading = true;
@@ -214,5 +192,30 @@ export class CampaignManagementComponent implements OnInit{
   }
 
 
+  joinCampaignByCode(): void {
+    const userId = this.getCurrentUserId(); // Méthode pour obtenir l'ID de l'utilisateur connecté
+    if (!userId) {
+      console.error('User not logged in.');
+      alert('Please log in to join the campaign.');
+      this.router.navigate(['/login']);  // Redirige vers la page de login si l'utilisateur n'est pas connecté
+      return;
+    }
 
+    // Appeler le service pour rejoindre la campagne avec le code d'invitation
+    this.isLoading = true;
+    this.campaignService.joinCampaignByCode(this.invitationCode, userId).subscribe({
+      next: (campaign) => {
+        console.log(`Successfully joined campaign: ${campaign.name}`);
+        alert('You have successfully joined the campaign!');
+        const campaignId = this.response.id;
+        this.router.navigate(['/campaign', campaignId]);
+      },
+      error: (err) => {
+        console.error('Error joining campaign:', err);
+        this.errorMessage = 'Failed to join the campaign. Please try again later.';
+        alert(this.errorMessage);
+        this.isLoading = false;
+      }
+    });
+  }
 }

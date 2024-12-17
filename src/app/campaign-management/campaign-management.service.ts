@@ -17,9 +17,11 @@ export class CampaignManagementService {
     return this._http.get<Campaign[]>(CampaignManagementService.URL);
   }
 
-  createCampaign(campaignData: { name: string; accessibility: string }): Observable<any> {
-    return this._http.post(`${CampaignManagementService.BASE_URL}`, campaignData);
+  createCampaign(userId: number, campaignData: { name: string; accessibility: string}): Observable<any> {
+    const url = `http://localhost:5277/api/users/${userId}/campaigns`;
+    return this._http.post<any>(url, campaignData);
   }
+
 
   getCampaignById(id: number): Observable<any> {
     const url = `${CampaignManagementService.URL_ID}/${id}`; // Utilise BASE_URL pour construire l'URL
@@ -28,7 +30,7 @@ export class CampaignManagementService {
 
   getUsersByCampaignId(campaignId: number): Observable<any[]> {
     // Utilisation de l'ID de la campagne pour obtenir les utilisateurs associés
-    const url = `${CampaignManagementService.BASE_URL}/${campaignId}/users`;
+    const url = `${CampaignManagementService.BASE_URL}/${campaignId}/user-campaigns`;
     return this._http.get<any[]>(url); // Retourne les utilisateurs associés à la campagne
   }
 
@@ -39,6 +41,11 @@ export class CampaignManagementService {
 
   getYourCampaigns(userId: number): Observable<any[]> {
     return this._http.get<any[]>(`http://localhost:5277/users/${userId}/campaigns`);
+  }
+
+  joinCampaignByCode(invitationCode: string, userId: number): Observable<any> {
+    // Appeler l'API pour rejoindre la campagne via le code d'invitation
+    return this._http.post<any>(`http://localhost:5277/api/CampaignCommand/${invitationCode}/join/${userId}`,null);
   }
 
 }

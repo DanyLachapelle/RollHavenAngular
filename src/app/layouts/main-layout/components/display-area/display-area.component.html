@@ -1,7 +1,18 @@
 <div class="display-wrapper">
   <h2>Zone d'affichage</h2>
-  <div class="content">
-    <!-- Contenu dynamique, par exemple détails du personnage sélectionné -->
-    <p>Sélectionnez un personnage pour afficher ses détails.</p>
+
+  <!-- Affichage pendant le chargement -->
+  <div *ngIf="isLoading">Chargement des détails de la campagne...</div>
+
+  <!-- Affichage des détails de la campagne -->
+  <div *ngIf="campaignDetails">
+    <h2>{{ campaignDetails.name }}</h2>
+    <p>{{campaignDetails.invitation_code}}</p>
+    <p>{{campaignDetails.accessibility}}</p>
+  </div>
+
+  <!-- Message d'erreur si les détails de la campagne ne peuvent pas être récupérés -->
+  <div *ngIf="!isLoading && !campaignDetails">
+    <p>Échec du chargement des détails de la campagne. Veuillez réessayer plus tard.</p>
   </div>
 </div>
