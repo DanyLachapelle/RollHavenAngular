@@ -46,9 +46,8 @@
         </div>
       </div>
 
-      <!-- Message si aucune campagne n'est disponible -->
-      <div *ngIf="!isLoading && userCampaigns.length === 0">
-        <p>You are not part of any campaigns.</p>
+      <div *ngIf="!isLoading && userCampaigns.length === 0" class="no-campaigns-message">
+        <p>You are not part of any campaigns. Please join a campaign to participate.</p>
       </div>
     </div>
 
