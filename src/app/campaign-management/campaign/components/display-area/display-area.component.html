@@ -1,18 +1,17 @@
 <div class="display-wrapper">
-  <h2>Zone d'affichage</h2>
+  <h2 class="section-title">Zone d'affichage</h2>
 
-  <!-- Affichage pendant le chargement -->
-  <div *ngIf="isLoading">Chargement des détails de la campagne...</div>
-
-  <!-- Affichage des détails de la campagne -->
-  <div *ngIf="campaignDetails">
-    <h2>{{ campaignDetails.name }}</h2>
-    <p>{{campaignDetails.invitation_code}}</p>
-    <p>{{campaignDetails.accessibility}}</p>
+  <div *ngIf="isLoading" class="loading-message">
+    Chargement des détails de la campagne...
   </div>
 
-  <!-- Message d'erreur si les détails de la campagne ne peuvent pas être récupérés -->
-  <div *ngIf="!isLoading && !campaignDetails">
+  <div *ngIf="campaignDetails" class="campaign-details">
+    <h2>{{ campaignDetails.name }}</h2>
+    <p>{{ campaignDetails.invitation_code }}</p>
+    <p>{{ campaignDetails.accessibility }}</p>
+  </div>
+
+  <div *ngIf="!isLoading && !campaignDetails" class="error-message">
     <p>Échec du chargement des détails de la campagne. Veuillez réessayer plus tard.</p>
   </div>
 </div>
