@@ -4,12 +4,17 @@ import { CampaignManagementComponent} from './campaign-management/campaign/campa
 import {InfoAccountComponent} from './info-account/info-account.component';
 import {LoginComponent} from "./user/login/login.component";
 import {CreateCampaignComponent} from './campaign-management/create-campaign/create-campaign.component';
+import {AppComponent} from './app.component';
 
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: AppComponent },
+  {
+    path: 'login',
+    loadComponent: () => import('./user/login/lazy/lazy.component').then(m => m.LazyLoginComponent),
+  },
   { path: 'register', component: RegisterComponent },
   { path: 'campaign-management', component: CampaignManagementComponent },
   { path: 'info-account', component: InfoAccountComponent },
-  {path: 'create-campaign', component: CreateCampaignComponent },
+  { path: 'create-campaign', component: CreateCampaignComponent },
 ];
