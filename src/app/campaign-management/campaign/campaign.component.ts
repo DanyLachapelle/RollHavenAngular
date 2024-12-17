@@ -17,7 +17,7 @@ import {NgForOf, NgIf} from '@angular/common';
   ],
   templateUrl: './campaign.component.html',
   standalone: true,
-  styleUrl: './campaign.component.scss'
+  styleUrl: './campaign.component.css'
 })
 export class CampaignComponent implements OnInit {
   campaignId: number | null = null;
