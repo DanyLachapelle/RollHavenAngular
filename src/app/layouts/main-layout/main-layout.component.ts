@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {CampaignManagementService} from '../../campaign-management/campaign-management.service';
 import {NgForOf, NgIf} from '@angular/common';
 import {CreateCampaignComponent} from '../../campaign-management/create-campaign/create-campaign.component';
+import {CreateCharacterSheetComponent} from './components/create-character-sheet/create-character-sheet.component';
 
 @Component({
   selector: 'app-main-layout',
@@ -15,7 +16,8 @@ import {CreateCampaignComponent} from '../../campaign-management/create-campaign
     PersonListComponent,
     NgIf,
     NgForOf,
-    CreateCampaignComponent
+    CreateCampaignComponent,
+    CreateCharacterSheetComponent
   ],
   templateUrl: './main-layout.component.html',
   standalone: true,
