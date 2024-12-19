@@ -4,14 +4,36 @@ import { CampaignManagementComponent} from './campaign-management/campaign/campa
 import {InfoAccountComponent} from './info-account/info-account.component';
 import {LoginComponent} from "./user/login/login.component";
 import {CreateCampaignComponent} from './campaign-management/create-campaign/create-campaign.component';
-import {MainLayoutComponent} from './layouts/main-layout/main-layout.component';
 
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'campaign-management', component: CampaignManagementComponent },
-  { path: 'info-account', component: InfoAccountComponent },
-  {path: 'create-campaign', component: CreateCampaignComponent },
-  { path: 'campaign/:id', component: MainLayoutComponent },
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./user/login/login.component').then(m => m.LoginComponent),
+  },
+  {
+    path: 'register',
+    loadComponent: () => import('./user/register/register.component').then(m => m.RegisterComponent),
+  },
+  {
+    path: 'campaign-management',
+    loadComponent: () => import('./campaign-management/campaign/campaign-management.component').then(m => m.CampaignManagementComponent),
+  },
+  {
+    path: 'info-account',
+    loadComponent: () => import('./info-account/info-account.component').then(m => m.InfoAccountComponent),
+  },
+  {
+    path: 'create-campaign',
+    loadComponent: () => import('./campaign-management/create-campaign/create-campaign.component').then(m => m.CreateCampaignComponent),
+  },
+  {
+    path: 'campaign/:id',
+    loadComponent: () => import('./layouts/main-layout/main-layout.component').then(m => m.MainLayoutComponent),
+  },
 ];

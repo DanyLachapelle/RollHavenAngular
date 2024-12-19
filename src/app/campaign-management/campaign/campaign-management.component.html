@@ -46,9 +46,8 @@
         </div>
       </div>
 
-      <!-- Message si aucune campagne n'est disponible -->
-      <div *ngIf="!isLoading && userCampaigns.length === 0">
-        <p>You are not part of any campaigns.</p>
+      <div *ngIf="!isLoading && userCampaigns.length === 0" class="no-campaigns-message">
+        <p>You are not part of any campaigns. Please join a campaign to participate.</p>
       </div>
     </div>
 
@@ -103,14 +102,15 @@
       <button (click)="viewAccountInfo()">Account Information</button>
     </div>
     <h2>Join a Campaign</h2>
-    <form>
+
+    <form (ngSubmit)="joinCampaignByCode()">
       <div class="form-group">
         <input
           type="text"
-          id="campaign-id"
-          placeholder="Enter the campaign ID"
-          name="campaign-id"
-          required
+          [(ngModel)]="invitationCode"
+        name="invitationCode"
+        placeholder="Enter the campaign invitation code"
+        required
         />
       </div>
       <button type="submit">Join</button>
