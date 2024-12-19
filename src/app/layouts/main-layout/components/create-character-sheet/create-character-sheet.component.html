@@ -16,7 +16,7 @@
       <label for="level">Level</label>
       <input type="number" id="level" formControlName="level" placeholder="1" required>
       <div *ngIf="sheetForm.get('level')?.invalid && sheetForm.get('level')?.touched" class="error">
-        Strength is required and be between 1 and 20.
+        Level is required and be between 1 and 20.
       </div>
     </div>
 
