@@ -1,7 +1,53 @@
 <div class="info-account-container">
   <div class="account-card">
     <h2>Account Information</h2>
-    <p class="account-detail"><strong>Username:</strong> </p>
-    <button>Change password</button>
+
+
+    <p class="account-detail-name"><strong>Username:</strong> {{ pseudo }}</p>
+    <p class="account-detail-email"><strong>Email:</strong> {{ email }}</p>
+
+
+    <button (click)="onUpdateClick()">Update Information</button>
+
+
+    <div *ngIf="isUpdating" class="update-form-container">
+      <h3>Update Your Information</h3>
+
+
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="pseudo">Username</label>
+          <input type="text" id="pseudo" formControlName="pseudo" placeholder="Enter your username">
+          <div *ngIf="updateForm.get('pseudo')?.invalid && updateForm.get('pseudo')?.touched" class="error">
+            Username is required.
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+          <div *ngIf="updateForm.get('email')?.invalid && updateForm.get('email')?.touched" class="error">
+            Please enter a valid email address.
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+          <div *ngIf="updateForm.get('password')?.invalid && updateForm.get('password')?.touched" class="error">
+            Password is required (at least 6 characters).
+          </div>
+        </div>
+
+
+        <div class="form-buttons">
+          <button type="submit" [disabled]="updateForm.invalid">Save Changes</button>
+          <button type="button" (click)="onCancel()">Cancel</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>

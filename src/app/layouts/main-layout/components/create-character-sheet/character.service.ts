@@ -22,7 +22,7 @@ export class CharacterService {
   }
 
   getBackgrounds(): Observable<any> {
-    const url = `${CharacterService.URL_BACKGROUND}/getBackgrounds`;
+    const url = `${CharacterService.URL_BACKGROUND}/getBackground`;
     return this._http.get<any>(url); // Récupère les weapons
   }
 
@@ -41,18 +41,9 @@ export class CharacterService {
     return this._http.get<any>(url); // Récupère les races
   }
 
-  createCharacter(characterData: {id: number;idCampaign: number;idPlayer: number; strength: number; dexterity: number;
-    constitution: number; intelligence: number; wisdom: number; charisma: number; level: number; xp: number;
-    proficiency: number; ac : number; hitPointsMax: number; hitPointsCurrent: number; hitPointsTemp: number;
-    hitDiceMax: number; hitDiceCurrent: number; deathSaveSuccess: number; deathSaveFailed: number;
-    initiative: number; speed: number; passivePerception: number; athletics:boolean; acrobatics:boolean;
-    sleightOfHand:boolean; stealth:boolean; arcana:boolean; history:boolean; investigation:boolean;
-    nature:boolean; religion:boolean; animalHandling:boolean; insight:boolean; medicine:boolean;
-    perception:boolean; survival:boolean; deception:boolean; intimidation:boolean; performance:boolean;
-    persuasion:boolean; heroicInspiration:boolean; armorTraining:string; size:string; name:string;  race:string;
-    class:string; subclass:string; background:string;}): Observable<any>  {
+  createCharacter(characterData: any): Observable<any>  {
 
-      const url = `${CharacterService.URL_NEWCHARACTER}/characterSheets`;
+      const url = `http://localhost:5277/CreatecharacterSheets`;
       return this._http.post<any>(url,characterData); // Envoie la fiche
   }
 

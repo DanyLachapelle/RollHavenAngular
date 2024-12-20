@@ -23,13 +23,13 @@
     <!-- Classe  -->
     <div class="form-group">
       <label for="class">Class</label>
-      <input type="text" id="class" formControlName="class" placeholder="Enter your character class" required>
-
-      <!--select id="class" formControlName="class" required>
-        <option value="{{class.id}}" *ngFor="let class from classes">
-          "{{class.name}}"
+      <select id="class" formControlName="class" required>
+        <option value="" disabled selected>Select a class</option>
+        <!-- Utilisez class.name comme value de l'option -->
+        <option *ngFor="let class of classes" [value]="class">
+          {{ class.name }}
         </option>
-      </select-->
+      </select>
 
       <div *ngIf="sheetForm.get('class')?.invalid && sheetForm.get('class')?.touched" class="error">
         Class is required.
@@ -39,29 +39,30 @@
     <!-- Race  -->
     <div class="form-group">
       <label for="race">Race</label>
-      <input type="text" id="race" formControlName="race" placeholder="Enter your character race" required>
-
-      <!--select id="race" formControlName="race" required>
-        <option value="{{race.id}}" *ngFor="let race from races">
-          "{{race.name}}"
+      <select id="race" formControlName="race" required>
+        <option value="" disabled selected>Select a race</option>
+        <option *ngFor="let race of races" [value]="race">
+          {{ race.name }}
         </option>
-      </select-->
+      </select>
 
       <div *ngIf="sheetForm.get('race')?.invalid && sheetForm.get('race')?.touched" class="error">
         Race is required.
       </div>
     </div>
 
+
+
     <!-- Background  -->
     <div class="form-group">
-      <label for="bg">Race</label>
-      <input type="text" id="bg" formControlName="bg" placeholder="Enter your character background" required>
+      <label for="bg">Background</label>
 
-      <!--select id="bg" formControlName="bg" required>
-        <option value="{{background.id}}" *ngFor="let background from backgrounds">
-          "{{background.name}}"
+      <select id="bg" formControlName="bg" required>
+        <option value="" disabled selected>Select a race</option>
+        <option  *ngFor="let background of backgrounds" [value]="background">
+          {{background.name}}
         </option>
-      </select-->
+      </select>
 
       <div *ngIf="sheetForm.get('bg')?.invalid && sheetForm.get('bg')?.touched" class="error">
         Background is required.
@@ -109,12 +110,13 @@
     </div>
 
       <!-- weapon  -->
+    <!--
       <div class="form-group">
         <label for="nbWeapon">Number of weapon</label>
         <input type="number" id="nbWeapon" formControlName="nbWeapon" placeholder="1" >
 
 
-        <!--div *ngFor="nbWeapon" class="nbWeapon">
+        div *ngFor="nbWeapon" class="nbWeapon">
 
         </div-->
 
@@ -123,11 +125,10 @@
         <option value="{{weapon.id}}" *ngFor="let weapon from weapons">
           "{{weapon.name}}"
         </option>
-        </select-->
+        </select
 
       </div>
-
-
+-->
     <!-- Spell -->
 
 
