@@ -27,6 +27,7 @@ export class CreateCharacterSheetComponent {
     this.sheetForm = this.fb.group({
       id: ['', Validators.required],
       idCampaign: ['', Validators.required],
+      idPlayer: ['', Validators.required],
       strength: ['', Validators.required],
       dexterity: ['', Validators.required],
       constitution: ['', Validators.required],

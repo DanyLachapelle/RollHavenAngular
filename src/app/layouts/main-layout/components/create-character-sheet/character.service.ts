@@ -41,7 +41,7 @@ export class CharacterService {
     return this._http.get<any>(url); // Récupère les races
   }
 
-  createCharacter(characterData: {id: number;idCampaign: number; strength: number; dexterity: number;
+  createCharacter(characterData: {id: number;idCampaign: number;idPlayer: number; strength: number; dexterity: number;
     constitution: number; intelligence: number; wisdom: number; charisma: number; level: number; xp: number;
     proficiency: number; ac : number; hitPointsMax: number; hitPointsCurrent: number; hitPointsTemp: number;
     hitDiceMax: number; hitDiceCurrent: number; deathSaveSuccess: number; deathSaveFailed: number;
